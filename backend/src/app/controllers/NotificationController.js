@@ -1,3 +1,4 @@
+import { response } from 'express';
 import User from '../models/User';
 import Notification from '../schemas/Notification';
 
@@ -20,6 +21,16 @@ class NotificationController {
             .limit(20);
 
         return response.json(notifications);
+    }
+
+    async update(request, response) {
+        const notification = await Notification.findOneAndUpdate(
+            request.params.id,
+            { read: true },
+            { new: true }
+        );
+
+        return response.json(notification);
     }
 }
 
