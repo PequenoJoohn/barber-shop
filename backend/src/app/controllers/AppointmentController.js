@@ -60,7 +60,15 @@ class AppointmentController {
 
         if (!isProvider) {
             return response.status(401).json({
-                error: 'You can only create appointments with providers ',
+                error: 'You can only create appointments with providers',
+            });
+        }
+
+        const equalUser = await User.findByPk(request.userId);
+
+        if (isProvider.id === equalUser.id) {
+            return response.status(401).json({
+                error: "You can't on create appointments with equal provider",
             });
         }
 
