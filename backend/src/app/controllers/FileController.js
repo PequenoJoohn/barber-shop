@@ -10,7 +10,6 @@ class FileController {
         });
 
         return response.json(file);
-        // return response.json(request.file);
     }
 }
 
